@@ -164,13 +164,32 @@ category_median_salary.sort('Median', ascending=False).head(5)
 category_median_salary.shape
 category_median_salary.plot(kind='hist', stacked=True, bins=16)
 
+
 # 8. Plot a histogram of the distribution of median salaries by major category
 
+category_median_salary.head(20).plot(by = majors.Major_category, kind='bar')
+
+majors.plot(by = majors.Major_category, kind='hist')
+
+
+
 # 9. What are the top 10 most UNemployed majors?
+
+majors[['Major', 'Unemployed']].sort('Unemployed', ascending = False).head(10)
+
 # What are the unemployment rates?
 
+unemployment_rate = majors.Unemployed / majors.Total 
+unemployment_rate
+
 # 10. What are the top 10 most UNemployed majors CATEGORIES? Use the mean for each category
+
+majors.groupby('Major_category')[['Major_category', 'Unemployed']].mean().sort('Unemployed', ascending = False).head(10)
+
 # What are the unemployment rates?
+unemployment_categories_rate = majors.groupby('Major_category').Unemployed.mean() / majors.groupby('Major_category').Total.mean()
+unemployment_categories_rate
+
 
 # 11. the total and employed column refer to the people that were surveyed.
 # Create a new column showing the emlpoyment rate of the people surveyed for each major
